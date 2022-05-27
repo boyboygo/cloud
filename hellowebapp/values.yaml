@@ -4,9 +4,12 @@ labels:
   AppName: hello
   ContainerName: hello-app
   AppVersion: "apps/v1"
+  tierType: web
 
 image:
-  repository: dockerworkshopdallas/java
+  #repository: dockerworkshopdallas/java
+  repository: us-docker.pkg.dev/google-samples/containers/gke/hello-app:2.0
   tag: release
   pullPolicy: IfNotPresent
   containerPort: 8080
+  cpuRes: 200m

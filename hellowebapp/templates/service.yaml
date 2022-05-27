@@ -2,19 +2,26 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: {{quote .Values.labels.AppName }}
+  #name: {{quote .Values.labels.AppName }}
+  name: {{quote .Chart.name }}
   labels:
-    service: {{quote .Values.labels.AppName }}
+    #service: {{quote .Values.labels.AppName }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
-    AppName: {{quote .Values.labels.AppName }}
-    AppVersion: {{quote .Values.labels.AppVersion }}
+    #AppName: {{quote .Values.labels.AppName }}
+    #AppVersion: {{quote .Values.labels.AppVersion }}
+    app: {{quote .Values.labels.AppName }}
+    tier: {{quote .Values.labels.tierType }}
 spec:
+  type: {{ .Values.spec.type }}
   selector:
-    AppName: {{quote .Values.labels.AppName }}
+    #AppName: {{quote .Values.labels.AppName }}
+    app: {{quote .Values.labels.AppName }}
+    tier: {{quote .Values.labels.tierType }}
   ports:
     - port: {{ .Values.spec.port }}
+      nodePort: {{ .Values.spec.nodePort }}
       targetPort: {{ .Values.spec.targetPort }}
-      protocol: TCP
-      name: http
+      #protocol: TCP
+      #name: http
 {{ end }}

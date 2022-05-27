@@ -3,28 +3,38 @@ kind: Deployment
 metadata:
   name: {{ .Chart.Name }}
   labels:
-    run: {{quote .Values.labels.AppName }}
+    #run: {{quote .Values.labels.AppName }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
     app: {{quote .Values.labels.AppName }}
-    AppVersion: {{quote .Values.labels.AppVersion }}
+    #AppVersion: {{quote .Values.labels.AppVersion }}
 spec:
   selector:
     matchLabels:
-      run: {{quote .Values.labels.AppName }}
-  replicas: {{ .Values.replicaCount }}
+      #run: {{quote .Values.labels.AppName }}
+      app: {{quote .Values.labels.AppName }}
+      tier: {{quote .Values.labels.tierType }}
+  #replicas: {{ .Values.replicaCount }}
   template:
     metadata:
       labels:
-        run: {{quote .Values.labels.AppName }}
+        #run: {{quote .Values.labels.AppName }}
         app.kubernetes.io/instance: {{ .Release.Name }}
         app.kubernetes.io/managed-by: {{ .Release.Service }}
-        AppName: {{quote .Values.labels.AppName }}
-        AppVersion: {{quote .Values.labels.AppVersion }}
-        container: app
+        #AppName: {{quote .Values.labels.AppName }}
+        #AppVersion: {{quote .Values.labels.AppVersion }}
+        #container: app
+        app: {{quote .Values.labels.AppName }}
+        tier: {{quote .Values.labels.tierType }}
     spec:
       containers:
-        - name: {{quote .Values.labels.AppName }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        - name: {{quote .Values.labels.ContainerName }}
+          #image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: {{ .Values.image.repository }}
           ports:
             - containerPort:  {{ .Values.image.containerPort }}
+          
+          resources:
+              requests:
+                cpu: {{ .Values.image.cpuRes }}
+            

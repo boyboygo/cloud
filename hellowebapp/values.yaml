@@ -5,6 +5,10 @@ labels:
   ContainerName: hello-app
   AppVersion: "apps/v1"
   tierType: web
+  specType: LoadBalancer
+  specPorts: 80
+  specNodePort: 8080
+  specTargetPort: 8080
 
 image:
   #repository: dockerworkshopdallas/java

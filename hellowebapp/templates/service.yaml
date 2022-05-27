@@ -3,7 +3,7 @@ kind: Service
 apiVersion: v1
 metadata:
   #name: {{quote .Values.labels.AppName }}
-  name: {{ .Chart.name }}
+  name: {{ .Chart.Name }}
   labels:
     #service: {{quote .Values.labels.AppName }}
     app.kubernetes.io/instance: {{ .Release.Name }}

@@ -1,11 +1,12 @@
 replicaCount: 1
 
 labels:
-  AppName: myspringapp
-  AppVersion: "1.0"
+  AppName: hello
+  ContainerName: hello-app
+  AppVersion: "apps/v1"
 
 image:
   repository: dockerworkshopdallas/java
   tag: release
   pullPolicy: IfNotPresent
-  containerPort: 8181
+  containerPort: 8080
